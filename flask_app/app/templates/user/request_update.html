@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Request Update{% endblock %}
+
+{% block content %}
+<h2>Request Update for {{ asset.description }}</h2>
+
+<form method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        <label for="custodian">New Custodian:</label><br>
+        {{ form.custodian(size=32) }}
+    </p>
+    <p>
+        <label for="location_code">New Location Code:</label><br>
+        {{ form.location_code(size=32) }}
+    </p>
+    <p><button type="submit">Submit Update Request</button></p>
+</form>
+{% endblock %}

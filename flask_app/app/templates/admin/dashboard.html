@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<h2>Admin Dashboard</h2>
+
+<h3>Pending Update Requests</h3>
+{% if update_requests %}
+<table border="1">
+    <thead>
+        <tr>
+            <th>Request ID</th>
+            <th>Asset ID</th>
+            <th>Requested Changes</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for request in update_requests %}
+        <tr>
+            <td>{{ request.id }}</td>
+            <td>{{ request.asset_id }}</td>
+            <td>
+                <ul>
+                    {% for field, value in request.requested_changes.items() %}
+                    <li><strong>{{ field }}:</strong> {{ value }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{ request.status }}</td>
+            <td>
+                <form action="{{ url_for('admin.approve_request', request_id=request.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" onclick="return confirm('Approve this request?');">Approve</button>
+                </form>
+                <form action="{{ url_for('admin.deny_request', request_id=request.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" onclick="return confirm('Deny this request?');">Deny</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No pending update requests at this time.</p>
+{% endif %}
+
+{% endblock %}

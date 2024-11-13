@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Update Asset{% endblock %}
+
+{% block content %}
+<h2>Update Asset</h2>
+
+<form method="POST" action="{{ url_for('admin.update_asset', asset_id=asset.id) }}">
+    {{ form.hidden_tag() }}
+    
+    <p>
+        <label for="business_unit">Business Unit</label><br>
+        {{ form.business_unit(size=20) }}
+    </p>
+    <p>
+        <label for="asset_identification">Asset Identification</label><br>
+        {{ form.asset_identification(size=20) }}
+    </p>
+    <p>
+        <label for="tag_number">Tag Number</label><br>
+        {{ form.tag_number(size=20) }}
+    </p>
+    <p>
+        <label for="department">Department</label><br>
+        {{ form.department(size=20) }}
+    </p>
+    <p>
+        <label for="serial_id">Serial ID</label><br>
+        {{ form.serial_id(size=20) }}
+    </p>
+    <p>
+        <label for="description">Description</label><br>
+        {{ form.description(size=20) }}
+    </p>
+    <p>
+        <label for="asset_status">Asset Status</label><br>
+        {{ form.asset_status(size=20) }}
+    </p>
+    <p>
+        <label for="asset_profile_id">Asset Profile ID</label><br>
+        {{ form.asset_profile_id(size=20) }}
+    </p>
+    <p>
+        <label for="location_code">Location Code</label><br>
+        {{ form.location_code(size=20) }}
+    </p>
+    <p>
+        <label for="custodian_emplid">Custodian EmplID</label><br>
+        {{ form.custodian_emplid(size=20) }}
+    </p>
+    <p>
+        <label for="custodian">Custodian</label><br>
+        {{ form.custodian(size=20) }}
+    </p>
+    <p>
+        <label for="custodian_euid">Custodian EUID</label><br>
+        {{ form.custodian_euid(size=20) }}
+    </p>
+    <p>
+        <label for="notes">Notes</label><br>
+        {{ form.notes(size=20) }}
+    </p>
+
+    <p><button type="submit">Submit Update</button></p>
+</form>
+{% endblock %}

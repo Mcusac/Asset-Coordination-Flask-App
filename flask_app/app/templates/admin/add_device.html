@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Add New Device{% endblock %}
+
+{% block content %}
+<h2>Add New Device</h2>
+
+<form method="post">
+    {{ form.hidden_tag() }}
+    
+    <p>
+        {{ form.business_unit.label }}<br>
+        {{ form.business_unit(size=32) }}
+    </p>
+    <p>
+        {{ form.asset_identification.label }}<br>
+        {{ form.asset_identification(size=32) }}
+    </p>
+    <p>
+        {{ form.tag_number.label }}<br>
+        {{ form.tag_number(size=32) }}
+    </p>
+    <p>
+        {{ form.department.label }}<br>
+        {{ form.department(size=32) }}
+    </p>
+    <p>
+        {{ form.serial_id.label }}<br>
+        {{ form.serial_id(size=32) }}
+    </p>
+    <p>
+        {{ form.description.label }}<br>
+        {{ form.description(size=32) }}
+    </p>
+    <p>
+        {{ form.asset_status.label }}<br>
+        {{ form.asset_status(size=32) }}
+    </p>
+    <p>
+        {{ form.asset_profile_id.label }}<br>
+        {{ form.asset_profile_id(size=32) }}
+    </p>
+    <p>
+        {{ form.location_code.label }}<br>
+        {{ form.location_code(size=32) }}
+    </p>
+    <p>
+        {{ form.custodian_emplid.label }}<br>
+        {{ form.custodian_emplid(size=32) }}
+    </p>
+    <p>
+        {{ form.custodian.label }}<br>
+        {{ form.custodian(size=32) }}
+    </p>
+    <p>
+        {{ form.custodian_euid.label }}<br>
+        {{ form.custodian_euid(size=32) }}
+    </p>
+    <p>
+        {{ form.notes.label }}<br>
+        {{ form.notes(size=32) }}
+    </p>
+
+    <p>{{ form.submit() }}</p>
+</form>
+{% endblock %}

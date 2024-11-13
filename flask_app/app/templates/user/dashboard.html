@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}User Dashboard{% endblock %}
+
+{% block content %}
+<h2>User Dashboard</h2>
+
+<!-- Filter Form -->
+<form id="filterForm">
+    <label for="filterColumn">Search by:</label>
+    <select id="filterColumn">
+        <option value="0">Tag Number</option>
+        <option value="1">Description</option>
+        <option value="2">Department</option>
+        <option value="3">Status</option>
+        <option value="4">Location</option>
+        <option value="5">Custodian</option>
+    </select>
+    <label for="filterValue">Value:</label>
+    <input type="text" id="filterValue" placeholder="Enter search term" />
+    <button type="button" id="applyFilter">Apply Filter</button>
+    <button type="button" id="resetFilter">Reset</button>
+</form>
+<br>
+
+<table id="userAssetTable" border="1">
+    <thead>
+        <tr>
+            <th>Tag Number</th>
+            <th>Description</th>
+            <th>Asset Status</th>
+            <th>Location Code</th>
+            <th>Custodian</th>
+            <th>Request Update</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for asset in assets %}
+        <tr>
+            <td>{{ asset.tag_number }}</td>
+            <td>{{ asset.description }}</td>
+            <td>{{ asset.asset_status }}</td>
+            <td>{{ asset.location_code }}</td>
+            <td>{{ asset.custodian }}</td>
+            <td>
+                <a href="{{ url_for('user.request_update', asset_id=asset.id) }}">Request Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        // Initialize DataTables with sorting and pagination enabled
+        var table = $('#assetTable').DataTable({
+            "paging": true,
+            "ordering": true,
+        });
+
+        // Apply filter based on form input
+        $('#applyFilter').on('click', function() {
+            var columnIndex = $('#filterColumn').val();  // Get selected column index
+            var filterValue = $('#filterValue').val();    // Get input value
+            table.column(columnIndex).search(filterValue).draw();
+        });
+
+        // Reset filter to show all rows
+        $('#resetFilter').on('click', function() {
+            $('#filterValue').val('');                   // Clear input
+            table.search('').columns().search('').draw(); // Reset all column filters
+        });
+    });
+</script>
+{% endblock %}
